@@ -3,6 +3,7 @@
 var express = require('express');
 var ParseServer = require('parse-server').ParseServer;
 var path = require('path');
+var PostmarkAdapter = require('parse-server-postmark-adapter');
 
 var databaseUri = process.env.DATABASE_URI || process.env.MONGODB_URI;
 
@@ -42,35 +43,10 @@ var api = new ParseServer({
   publicServerURL: 'https://obsquash.herokuapp.com/parse',
   // Your apps name. This will appear in the subject and body of the emails that are sent.
   appName: 'OB Squash',
-  emailAdapter: {
-        module: "simple-parse-smtp-adapter",
-        options: {
-            fromAddress: 'obsquashapp@gmail.com',
-            user: 'obsquashapp@gmail.com',
-            password: '8terlich4us',
-            host: 'smtp.gmail.com',
-            isSSL: true, //True or false if you are using ssl 
-            port: 587, //SSL port or another port 
-            name: 'domain name', //  optional, used for identifying to the server  
-            //Somtimes the user email is not in the 'email' field, the email is search first in 
-            //email field, then in username field, if you have the user email in another field 
-            //You can specify here 
-            emailField: 'obsquashapp@gmail.com', 
-            templates: {
-                //This template is used only for reset password email 
-                resetPassword: {
-                    //Path to your template 
-                    template: __dirname + '/views/email/reset-password',
-                    //Subject for this email 
-                    subject: 'Reset your password'
-                },
-                verifyEmail: {
-                    template: __dirname + '/views/email/verify-email',
-                    subject: 'Verify Email'
-                }
-            }
-        }
-    }
+  emailAdapter: PostmarkAdapter({
+    apiKey: 'c1fc1e63-7957-4498-8f1d-aeee37193d3b',
+    fromAddress: 'obsquash@obsquashapp.com',
+  })
 });
 // Client-keys like the javascript key or the .NET key are not necessary with parse-server
 // If you wish you require them, you can set them as options in the initialization above:
