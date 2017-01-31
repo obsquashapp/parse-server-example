@@ -46,8 +46,8 @@ var api = new ParseServer({
         module: "simple-parse-smtp-adapter",
         options: {
             fromAddress: 'obsquashapp@gmail.com',
-            user: 'obsquashapp@gmail.com',
-            password: '8terlich4us',
+            user: process.env.SMTP_USER,
+            password: process.env.SMTP_PASSWORD,
             host: 'smtp.gmail.com',
             isSSL: true, //True or false if you are using ssl 
             port: 465, //SSL port or another port 
