@@ -49,8 +49,8 @@ var api = new ParseServer({
             user: 'obsquashapp@gmail.com',
             password: '8terlich4us',
             host: 'smtp.gmail.com',
-            isSSL: false, //True or false if you are using ssl 
-            port: 587, //SSL port or another port 
+            isSSL: true, //True or false if you are using ssl 
+            port: 465, //SSL port or another port 
             name: 'domain name', //  optional, used for identifying to the server  
             //Somtimes the user email is not in the 'email' field, the email is search first in 
             //email field, then in username field, if you have the user email in another field 
