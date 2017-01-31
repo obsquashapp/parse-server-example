@@ -13,7 +13,7 @@
     "kerberos": "~0.0.x",
     "parse": "~1.8.0",
     "parse-server": "*",
-    "parse-server-postmark-adapter": "*"
+    "simple-parse-smtp-adapter": "*"
   },
   "scripts": {
     "start": "node index.js"
