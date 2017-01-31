@@ -45,17 +45,17 @@ var api = new ParseServer({
   emailAdapter: {
         module: "simple-parse-smtp-adapter",
         options: {
-            fromAddress: 'obsquashapp@gmail.com',
+            fromAddress: process.env.SMTP_FROMADDRESS,
             user: process.env.SMTP_USER,
             password: process.env.SMTP_PASSWORD,
-            host: 'smtp.gmail.com',
-            isSSL: true, //True or false if you are using ssl 
-            port: 465, //SSL port or another port 
-            name: 'domain name', //  optional, used for identifying to the server  
+            host: process.env.SMTP_HOST,
+            isSSL: process.env.SMTP_SSL, //True or false if you are using ssl 
+            port: process.env.SMTP_PORT, //SSL port or another port 
+            name: process.env.SMTP_DOMAIN_NAME, //  optional, used for identifying to the server  
             //Somtimes the user email is not in the 'email' field, the email is search first in 
             //email field, then in username field, if you have the user email in another field 
             //You can specify here 
-            emailField: 'obsquashapp@gmail.com'
+            emailField: process.env.SMTP_EMAIL_FIELD
         }
     }
 });
