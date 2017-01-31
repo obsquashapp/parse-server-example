@@ -20,6 +20,14 @@
     "SERVER_URL": {
       "description": "URL to connect to your Heroku instance (update with your app's name + PARSE_MOUNT)",
       "value": "http://yourappname.herokuapp.com/parse"
+    },
+    "SMTP_PASSWORD": {
+      "description": "EMail sender password",
+      "value": "123456"
+    },
+    "SMTP_USER": {
+      "description": "EMail sender",
+      "value": "user@email.com"
     }
   },
   "image": "heroku/nodejs",
