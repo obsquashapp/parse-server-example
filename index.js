@@ -1,6 +1,6 @@
 // Example express application adding the parse-server module to expose Parse
 // compatible API routes.
-const PostmarkAdapter = require('parse-server-postmark-adapter');
+var PostmarkAdapter = require('parse-server-postmark-adapter');
 var express = require('express');
 var ParseServer = require('parse-server').ParseServer;
 var path = require('path');
@@ -24,7 +24,7 @@ verifyUserEmails: true, // Enable email verification
   emailAdapter: PostmarkAdapter({
     apiKey: 'c1fc1e63-7957-4498-8f1d-aeee37193d3b',
     fromAddress: 'obsquash@obsquashapp.com',
-  }),
+  })
 });
 // Client-keys like the javascript key or the .NET key are not necessary with parse-server
 // If you wish you require them, you can set them as options in the initialization above:
