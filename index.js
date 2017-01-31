@@ -1,6 +1,5 @@
 // Example express application adding the parse-server module to expose Parse
 // compatible API routes.
-var PostmarkAdapter = require('parse-server-postmark-adapter');
 var express = require('express');
 var ParseServer = require('parse-server').ParseServer;
 var path = require('path');
@@ -21,10 +20,35 @@ var api = new ParseServer({
     classNames: ["Posts", "Comments"] // List of classes to support for query subscriptions
   },
 verifyUserEmails: true, // Enable email verification
-  emailAdapter: PostmarkAdapter({
-    apiKey: 'c1fc1e63-7957-4498-8f1d-aeee37193d3b',
-    fromAddress: 'obsquash@obsquashapp.com',
-  })
+  emailAdapter: {
+        module: "simple-parse-smtp-adapter",
+        options: {
+            fromAddress: 'your@sender.address',
+            user: 'email@email.com',
+            password: 'AwesomePassword',
+            host: 'your.smtp.host',
+            isSSL: true, //True or false if you are using ssl 
+            port: 465, //SSL port or another port 
+            name: 'your domain name', //  optional, used for identifying to the server  
+            //Somtimes the user email is not in the 'email' field, the email is search first in 
+            //email field, then in username field, if you have the user email in another field 
+            //You can specify here 
+            emailField: 'username', 
+            templates: {
+                //This template is used only for reset password email 
+                resetPassword: {
+                    //Path to your template 
+                    template: __dirname + '/views/email/reset-password',
+                    //Subject for this email 
+                    subject: 'Reset your password'
+                },
+                verifyEmail: {
+                    template: __dirname + '/views/email/verify-email',
+                    subject: 'Verify Email'
+                }
+            }
+        }
+    }
 });
 // Client-keys like the javascript key or the .NET key are not necessary with parse-server
 // If you wish you require them, you can set them as options in the initialization above:
